@@ -1,0 +1,17 @@
+---
+- hosts: 192.168.56.101
+  become: true
+  vars_prompt:
+    - name: ansible_become_password
+      prompt: "Enter sudo password"
+      private: yes
+
+  tasks:
+    - name: Create directory "merci" in /home
+      file:
+        path: /home/merci
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0755'
+
